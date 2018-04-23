@@ -8,6 +8,7 @@ module ReadMyTime
 
       # options by default
       opts[:skip_seconds] = false if opts[:skip_seconds].nil?
+      opts[:short_format] = false if opts[:short_format].nil?
 
       unit_time_dividers.each_with_object([]) do |(unit_time, divider), s|
 
@@ -16,6 +17,7 @@ module ReadMyTime
 
           if rest.nonzero? && !(unit_time == :seconds && opts[:skip_seconds])
             word = I18n.t(unit_time.to_s, count: rest, scope: locale_prefix)
+            word = (opts[:short_format] ? word[0] : word)
             s.unshift("#{rest} #{word}")
           end
         end

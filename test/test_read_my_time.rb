@@ -20,6 +20,10 @@ class TestReadMyTime < MiniTest::Test
     assert_equal('', 10.seconds_in_words(skip_seconds: true))
   end
 
+  def test_return_seconds_using_short_format
+    assert_equal('10 s', 10.seconds_in_words(short_format: true))
+  end
+
   def test_handle_float_values
     assert_equal('10 seconds', 10.1.seconds_in_words)
   end
@@ -38,6 +42,10 @@ class TestReadMyTime < MiniTest::Test
 
   def test_return_word_days
     assert_equal('1 day 1 hour 1 minute 40 seconds', (1.day + 1.hour + 1.minute + 40).seconds_in_words)
+  end
+
+  def test_return_word_days_using_short_format
+    assert_equal('1 d 1 h 1 m 40 s', (1.day + 1.hour + 1.minute + 40).seconds_in_words(short_format: true))
   end
 
   # skip show 0 values
